@@ -52,8 +52,9 @@
       padding: 10px;
       box-shadow: 0 4px 8px rgba(0,0,0,0.2);
       display: flex;
-      justify-content: center;
+      justify-content: space-between;
       align-items: center;
+      position: relative;
     }
 
     .side-container {
@@ -114,6 +115,34 @@
     .right-bottom { flex: 1; background: rgba(255,255,255,0.5); }
     .bottom-iframe { height: 110px; flex: 0 0 auto; margin-bottom: 10px; }
 
+    .timer {
+      font-size: 1.2rem;
+      color: #FFFFFF;
+      display: flex;
+      gap: 10px;
+      margin-left: auto;
+      margin-right: 10px;
+    }
+
+    .time-block {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .box {
+      background-color: #97c7d2;
+      padding: 5px 10px;
+      border-radius: 8px;
+      min-width: 40px;
+    }
+
+    .label {
+      color: #97c7d2;
+      font-size: 0.7rem;
+      margin-top: 2px;
+    }
+
     @media (max-width: 1024px) {
       .left-container, .right-container, .side-container {
         width: 200px;
@@ -145,6 +174,17 @@
       }
       .bottom-iframe { height: 80px; }
     }
+
+    .timer-wrapper {
+      display: flex;
+      align-items: center;
+      margin-left: auto;
+    }
+
+    .extra-image {
+      height: 10px;
+      margin-right: 20px;
+    }
   </style>
 </head>
 <body>
@@ -153,6 +193,12 @@
     <div class="content-wrapper">
       <div class="top-full-container">
         <img src="https://static.wixstatic.com/media/a6967f_eee0d017524f4a48bf2870cc2385c10b~mv2.png" alt="Logo">
+        
+        <!-- Adicionado div com imagem e timer -->
+        <div class="timer-wrapper">
+          <img src="https://static.wixstatic.com/media/a6967f_3021b8bc351d4b899a211ba36f1aafd9~mv2.png" alt="Extra" class="extra-image">
+          <div class="timer" id="timer">A carregar...</div>
+        </div>
       </div>
 
       <div class="page-content">
@@ -193,5 +239,43 @@
     </div>
   </div>
 
+  <script>
+    const startDate = new Date(2024, 2, 24, 0, 0, 0);
+
+    function updateTimer() {
+      const now = new Date();
+      const diff = now - startDate;
+
+      if (diff < 0) {
+        document.getElementById('timer').innerHTML = "Ainda não começou!";
+        return;
+      }
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((diff / (1000 * 60)) % 60);
+      const seconds = Math.floor((diff / 1000) % 60);
+
+      document.getElementById('timer').innerHTML = `
+        <div class="time-block">
+          <div class="box">${days}</div>
+          <div class="label">days</div>
+        </div>
+        <div class="time-block">
+          <div class="box">${hours}</div>
+          <div class="label">hours</div>
+        </div>
+        <div class="time-block">
+          <div class="box">${minutes}</div>
+          <div class="label">min</div>
+        </div>
+        <div class="time-block">
+          <div class="box">${seconds}</div>
+          <div class="label">sec</div>
+        </div>
+      `;
+    }
+    setInterval(updateTimer, 1000);
+  </script> 
 </body>
 </html>
