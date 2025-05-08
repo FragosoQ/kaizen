@@ -59,8 +59,8 @@
     .side-container {
       background: rgba(255,255,255,0.5);
       width: 250px;
-      margin-left: 10px; /* distancia 10px da margem esquerda */
-      height: 100%; /* igual à altura do left-container */
+      margin-left: 10px;
+      height: 100%;
       flex-shrink: 0;
     }
 
@@ -114,7 +114,6 @@
     .right-bottom { flex: 1; background: rgba(255,255,255,0.5); }
     .bottom-iframe { height: 110px; flex: 0 0 auto; margin-bottom: 10px; }
 
-    /* Media Queries para responsividade */
     @media (max-width: 1024px) {
       .left-container, .right-container, .side-container {
         width: 200px;
@@ -152,23 +151,19 @@
 
   <div class="page-wrapper">
     <div class="content-wrapper">
-      <!-- Topo largura total -->
       <div class="top-full-container">
         <img src="https://static.wixstatic.com/media/a6967f_eee0d017524f4a48bf2870cc2385c10b~mv2.png" alt="Logo">
       </div>
 
-      <!-- Parte central com três colunas -->
       <div class="page-content">
-        <!-- Novo container translúcido à esquerda -->
         <div class="side-container">
-          <iframe src="https://calendar.google.com/calendar/embed?src=c_d89img0gp1ijoqa6t2bh53hmqqs%40group.calendar.google.com&ctz=Europe%2FLisbon&mode=WEEK" style="border:0" frameborder="0" scrolling="no"></iframe>
+          <iframe src="https://calendar.google.com/calendar/u/0/embed?src=c_d89img0gp1ijoqa6t2bh53hmqs@group.calendar.google.com&ctz=Europe/Lisbon" style="border:0" frameborder="0" scrolling="no"></iframe>
         </div>
-        <!-- Esquerda -->
+
         <div class="left-container iframe-box">
           <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vT7JEcF1ia5_t2ZFNjjw_U1r-2jsl2dTJP4Rt6CEcElQOzfiY0EKoHflHSStIkV7mc2WJVwcRh2OEVL/pubhtml?gid=1691990615&single=true"></iframe>
         </div>
 
-        <!-- Centro -->
         <div class="main-container">
           <div class="iframe-box top-iframe">
             <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRtIDbzhoFNJbqKwZGSPG-9cVgTS2fXDtcYbagdQh6w9zYGv6rqFVi9iymD4ub6TaO_1rpvQsDjWEow/pubhtml?widget=true&amp;headers=false"></iframe>
@@ -178,7 +173,6 @@
           </div>
         </div>
 
-        <!-- Direita -->
         <div class="right-container">
           <div class="iframe-box right-top">
             <p style="margin:0; text-align:center;">Topo Direito</p>
@@ -190,7 +184,6 @@
       </div>
     </div>
 
-    <!-- Bottom iframe -->
     <div class="bottom-iframe">
       <iframe 
         src="https://lookerstudio.google.com/embed/reporting/46597016-453f-43bf-975b-85f36e84f607/page/p_k37y67z8qd"
