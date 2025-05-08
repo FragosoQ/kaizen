@@ -57,13 +57,13 @@
       position: relative;
     }
 
-    .side-container {
-      background: rgba(255,255,255,0.5);
-      width: 250px;
-      margin-left: 10px;
-      height: 100%;
-      flex-shrink: 0;
-    }
+.side-container {
+  background: rgba(255,255,255,0.5);
+  width: 40%; /* Alterado para 20% de largura */
+  height: 302px; /* Definido a altura para 300px */
+  margin-left: 10px;
+  flex-shrink: 0;
+}
 
     .top-full-container img {
       max-width: 100%;
@@ -79,7 +79,7 @@
       overflow: hidden;
     }
 
-    .left-container,
+    /*.left-container,*/
     .right-container {
       display: flex;
       flex-direction: column;
@@ -88,6 +88,7 @@
       height: 100%;
       flex-shrink: 0;
     }
+
 
     .main-container {
       flex: 1;
@@ -98,9 +99,15 @@
       min-width: 0;
     }
 
+	
     .iframe-box {
       height: 100%;
     }
+
+/*	.left-container,
+    .iframe-box {
+      height: 100%;
+    }*/
 
     iframe {
       width: 100%;
@@ -113,7 +120,7 @@
     .center-iframe { flex: 1; }
     .right-top { flex: 1; background: rgba(255,255,255,0.5); }
     .right-bottom { flex: 1; background: rgba(255,255,255,0.5); }
-    .bottom-iframe { height: 110px; flex: 0 0 auto; margin-bottom: 10px; }
+    .bottom-iframe { height: 120px; flex: 0 0 auto; margin-bottom: 20px; }
 
     .timer {
       font-size: 1.2rem;
@@ -155,10 +162,13 @@
         flex-direction: column;
         overflow-y: auto;
       }
-      .left-container, .right-container, .side-container, .main-container {
+      .left-container, .right-container,.side-container, .main-container {
         width: 100%;
         height: auto;
       }
+      
+      
+       
       .top-full-container, .bottom-iframe {
         margin: 0 0;
       }
@@ -209,9 +219,9 @@
           <iframe src="https://calendar.google.com/calendar/u/0/embed?src=c_d89img0gp1ijoqa6t2bh53hmqs@group.calendar.google.com&ctz=Europe/Lisbon" style="border:0" frameborder="0" scrolling="no"></iframe>
         </div>
 
-        <div class="left-container iframe-box">
+       <!-- <div class="left-container iframe-box">
           <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vT7JEcF1ia5_t2ZFNjjw_U1r-2jsl2dTJP4Rt6CEcElQOzfiY0EKoHflHSStIkV7mc2WJVwcRh2OEVL/pubhtml?gid=1691990615&single=true"></iframe>
-        </div>
+        </div>-->
 
         <div class="main-container">
           <div class="iframe-box top-iframe">
