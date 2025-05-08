@@ -45,7 +45,8 @@
 
     .top-full-container,
     .bottom-iframe,
-    .iframe-box {
+    .iframe-box,
+    .side-container {
       background: white;
       border-radius: 15px;
       padding: 10px;
@@ -53,6 +54,14 @@
       display: flex;
       justify-content: center;
       align-items: center;
+    }
+
+    .side-container {
+      background: rgba(255,255,255,0.5);
+      width: 250px;
+      margin-left: 10px; /* distancia 10px da margem esquerda */
+      height: 100%; /* igual à altura do left-container */
+      flex-shrink: 0;
     }
 
     .top-full-container img {
@@ -101,13 +110,13 @@
 
     .top-iframe { flex: 0 0 30%; }
     .center-iframe { flex: 1; }
-    .right-top { flex: 1; }
-    .right-bottom { flex: 1; }
-    .bottom-iframe { height: 100px; flex: 0 0 auto; }
+    .right-top { flex: 1; background: rgba(255,255,255,0.5); }
+    .right-bottom { flex: 1; background: rgba(255,255,255,0.5); }
+    .bottom-iframe { height: 100px; flex: 0 0 auto; margin-bottom: 10px; }
 
     /* Media Queries para responsividade */
     @media (max-width: 1024px) {
-      .left-container, .right-container {
+      .left-container, .right-container, .side-container {
         width: 200px;
       }
       .top-iframe { flex: 0 0 25%; }
@@ -118,7 +127,7 @@
         flex-direction: column;
         overflow-y: auto;
       }
-      .left-container, .right-container, .main-container {
+      .left-container, .right-container, .side-container, .main-container {
         width: 100%;
         height: auto;
       }
@@ -150,6 +159,10 @@
 
       <!-- Parte central com três colunas -->
       <div class="page-content">
+        <!-- Novo container translúcido à esquerda -->
+        <div class="side-container">
+          <p style="margin:0; text-align:center;">Novo Container</p>
+        </div>
         <!-- Esquerda -->
         <div class="left-container iframe-box">
           <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vT7JEcF1ia5_t2ZFNjjw_U1r-2jsl2dTJP4Rt6CEcElQOzfiY0EKoHflHSStIkV7mc2WJVwcRh2OEVL/pubhtml?gid=1691990615&single=true"></iframe>
