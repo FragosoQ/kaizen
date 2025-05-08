@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="refresh" content="300">
+  <title>Página com Iframes</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background-image: url('https://static.wixstatic.com/media/a6967f_10b71864dc8c4562aec1da2611325151~mv2.png');
+      background-size: cover;
+      background-position: center;
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .page-wrapper {
+      margin: 0 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .content-wrapper {
+      padding: 20px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .top-full-container {
+      width: 100%;
+      border-radius: 15px;
+      padding: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      background: white;
+    }
+
+    .page-content {
+      display: flex;
+      flex-direction: row;
+      gap: 20px;
+      width: 100%;
+      flex-wrap: wrap;
+    }
+
+    .left-container {
+      width: 250px;
+      height: 720px;
+    }
+
+    .main-container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      min-width: 300px;
+    }
+
+    .right-container {
+      width: 250px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .iframe-box {
+      background-color: white;
+      border-radius: 15px;
+      padding: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      border-radius: 10px;
+    }
+
+    .top-iframe { height: 200px; }
+    .center-iframe { height: 500px; }
+    .right-top { height: 300px; }
+    .right-bottom { height: 150px; }
+    .full-top { height: 150px; }
+
+    .bottom-iframe {
+      width: 100%;
+      height: 100px;
+      background: white;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      border-radius: 15px;
+      
+    }
+  </style>
+</head>
+<body>
+
+  <div class="page-wrapper">
+    <div class="content-wrapper">
+      <!-- Topo largura total -->
+      <div class="top-full-container full-top">
+        <p style="margin:0; text-align:center;">Container no Topo (Largura Total)</p>
+      </div>
+
+      <!-- Parte central com três colunas -->
+      <div class="page-content">
+        <!-- Esquerda -->
+        <div class="left-container iframe-box">
+          <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vT7JEcF1ia5_t2ZFNjjw_U1r-2jsl2dTJP4Rt6CEcElQOzfiY0EKoHflHSStIkV7mc2WJVwcRh2OEVL/pubhtml?gid=1691990615&single=true"></iframe>
+        </div>
+
+        <!-- Centro -->
+        <div class="main-container">
+          <div class="iframe-box top-iframe">
+            <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRtIDbzhoFNJbqKwZGSPG-9cVgTS2fXDtcYbagdQh6w9zYGv6rqFVi9iymD4ub6TaO_1rpvQsDjWEow/pubhtml?widget=true&amp;headers=false"></iframe>
+          </div>
+          <div class="iframe-box center-iframe">
+            <iframe src="https://www.appsheet.com/start/2906038e-208d-4045-94ca-0465d85da34c"></iframe>
+          </div>
+        </div>
+
+        <!-- Direita -->
+        <div class="right-container">
+          <div class="iframe-box right-top">
+            <p style="margin:0; text-align:center;">Topo Direito</p>
+          </div>
+          <div class="iframe-box right-bottom">
+            <p style="margin:0; text-align:center;">Fundo Direito</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom iframe -->
+    <div class="bottom-iframe">
+      <iframe 
+        src="https://lookerstudio.google.com/embed/reporting/46597016-453f-43bf-975b-85f36e84f607/page/p_k37y67z8qd"
+        allowfullscreen 
+        sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox">
+      </iframe>
+    </div>
+  </div>
+
+</body>
+</html>
