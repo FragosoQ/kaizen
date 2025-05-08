@@ -3,15 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="refresh" content="300">
-  <title>Página com Iframes</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Página com Iframes Responsiva</title>
   <style>
     * {
       box-sizing: border-box;
     }
 
-    body {
+    html, body {
       margin: 10px 0;
       padding: 0;
+      height: 100%;
+    }
+
+    body {
       background-image: url('https://static.wixstatic.com/media/a6967f_10b71864dc8c4562aec1da2611325151~mv2.png');
       background-size: cover;
       background-position: center;
@@ -35,18 +40,19 @@
       flex-direction: column;
       gap: 10px;
       flex: 1;
+      overflow: hidden;
     }
 
-    .top-full-container {
-      width: 100%;
+    .top-full-container,
+    .bottom-iframe,
+    .iframe-box {
+      background: white;
       border-radius: 15px;
       padding: 10px;
       box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-      background: white;
       display: flex;
       justify-content: center;
       align-items: center;
-      flex: 0 0 auto;
     }
 
     .top-full-container img {
@@ -60,12 +66,17 @@
       gap: 10px;
       width: 100%;
       flex: 1;
-      flex-wrap: nowrap;
+      overflow: hidden;
     }
 
-    .left-container {
+    .left-container,
+    .right-container {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
       width: 250px;
       height: 100%;
+      flex-shrink: 0;
     }
 
     .main-container {
@@ -73,20 +84,11 @@
       display: flex;
       flex-direction: column;
       gap: 10px;
-    }
-
-    .right-container {
-      width: 250px;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
+      height: 100%;
+      min-width: 0;
     }
 
     .iframe-box {
-      background-color: white;
-      border-radius: 15px;
-      padding: 10px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
       height: 100%;
     }
 
@@ -101,15 +103,39 @@
     .center-iframe { flex: 1; }
     .right-top { flex: 1; }
     .right-bottom { flex: 1; }
-    .full-top { flex: 0 0 auto; }
+    .bottom-iframe { height: 100px; flex: 0 0 auto; }
 
-    .bottom-iframe {
-      width: 100%;
-      height: 100px;
-      background: white;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-      border-radius: 15px;
-      flex: 0 0 auto;
+    /* Media Queries para responsividade */
+    @media (max-width: 1024px) {
+      .left-container, .right-container {
+        width: 200px;
+      }
+      .top-iframe { flex: 0 0 25%; }
+    }
+
+    @media (max-width: 768px) {
+      .page-content {
+        flex-direction: column;
+        overflow-y: auto;
+      }
+      .left-container, .right-container, .main-container {
+        width: 100%;
+        height: auto;
+      }
+      .top-full-container, .bottom-iframe {
+        margin: 0 0;
+      }
+      body {
+        height: auto;
+        overflow: visible;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .top-full-container img {
+        max-height: 60px;
+      }
+      .bottom-iframe { height: 80px; }
     }
   </style>
 </head>
@@ -119,7 +145,7 @@
     <div class="content-wrapper">
       <!-- Topo largura total -->
       <div class="top-full-container">
-        <img src="https://static.wixstatic.com/media/a6967f_eee0d017524f4a48bf2870cc2385c10b~mv2.png" alt="Imagem Topo">
+        <img src="https://static.wixstatic.com/media/a6967f_eee0d017524f4a48bf2870cc2385c10b~mv2.png" alt="Logo">
       </div>
 
       <!-- Parte central com três colunas -->
