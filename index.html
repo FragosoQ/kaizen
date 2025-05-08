@@ -11,7 +11,6 @@
     }
 
     html, body {
-      /*margin: 20px 0;*/
       padding: 10px;
       height: 100%;
     }
@@ -46,7 +45,8 @@
     .top-full-container,
     .bottom-iframe,
     .iframe-box,
-    .side-container {
+    .side-container,
+    .new-appsheet-container {
       background: white;
       border-radius: 15px;
       padding: 10px;
@@ -57,13 +57,14 @@
       position: relative;
     }
 
-.side-container {
-  background: rgba(255,255,255,0.5);
-  width: 25vw; /* Alterado para 20% de largura */
-  height: 40vh; /* Definido a altura para 300px */
-  margin-left: 10px;
-  flex-shrink: 0;
-}
+    .side-container,
+    .new-appsheet-container {
+      background: rgba(255,255,255,0.5);
+      width: 25vw;
+      height: 40vh;
+      margin-left: 10px;
+      flex-shrink: 0;
+    }
 
     .top-full-container img {
       max-width: 100%;
@@ -79,7 +80,6 @@
       overflow: hidden;
     }
 
-    /*.left-container,*/
     .right-container {
       display: flex;
       flex-direction: column;
@@ -88,7 +88,6 @@
       height: 100%;
       flex-shrink: 0;
     }
-
 
     .main-container {
       flex: 1;
@@ -99,15 +98,9 @@
       min-width: 0;
     }
 
-	
     .iframe-box {
       height: 100%;
     }
-
-/*	.left-container,
-    .iframe-box {
-      height: 100%;
-    }*/
 
     iframe {
       width: 100%;
@@ -151,7 +144,7 @@
     }
 
     @media (max-width: 1024px) {
-      .left-container, .right-container, .side-container {
+      .left-container, .right-container, .side-container, .new-appsheet-container {
         width: 200px;
       }
       .top-iframe { flex: 0 0 25%; }
@@ -162,13 +155,10 @@
         flex-direction: column;
         overflow-y: auto;
       }
-      .left-container, .right-container,.side-container, .main-container {
+      .left-container, .right-container, .side-container, .main-container, .new-appsheet-container {
         width: 100%;
         height: auto;
       }
-      
-      
-       
       .top-full-container, .bottom-iframe {
         margin: 0 0;
       }
@@ -203,25 +193,21 @@
     <div class="content-wrapper">
       <div class="top-full-container">
         <img src="https://static.wixstatic.com/media/a6967f_eee0d017524f4a48bf2870cc2385c10b~mv2.png" alt="Logo">
-        
-        <!-- Adicionado div com imagem e timer -->
         <div class="timer-wrapper">
-         
-         <img src="https://static.wixstatic.com/media/a6967f_3021b8bc351d4b899a211ba36f1aafd9~mv2.png" 
-     alt="Extra">
-         
+          <img src="https://static.wixstatic.com/media/a6967f_3021b8bc351d4b899a211ba36f1aafd9~mv2.png" alt="Extra">
           <div class="timer" id="timer">A carregar...</div>
         </div>
       </div>
 
       <div class="page-content">
-        <div class="side-container">
-          <iframe src="https://calendar.google.com/calendar/u/0/embed?src=c_d89img0gp1ijoqa6t2bh53hmqs@group.calendar.google.com&ctz=Europe/Lisbon" style="border:0" frameborder="0" scrolling="no"></iframe>
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+          <div class="side-container">
+            <iframe src="https://calendar.google.com/calendar/u/0/embed?src=c_d89img0gp1ijoqa6t2bh53hmqs@group.calendar.google.com&ctz=Europe/Lisbon" style="border:0" frameborder="0" scrolling="no"></iframe>
+          </div>
+          <div class="new-appsheet-container">
+            <iframe src="https://www.appsheet.com/start/3be9619c-69c2-4b46-bdac-32692f19c2f5"></iframe>
+          </div>
         </div>
-
-       <!-- <div class="left-container iframe-box">
-          <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vT7JEcF1ia5_t2ZFNjjw_U1r-2jsl2dTJP4Rt6CEcElQOzfiY0EKoHflHSStIkV7mc2WJVwcRh2OEVL/pubhtml?gid=1691990615&single=true"></iframe>
-        </div>-->
 
         <div class="main-container">
           <div class="iframe-box top-iframe">
