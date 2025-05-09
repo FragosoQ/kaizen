@@ -4,7 +4,8 @@
   <meta charset="UTF-8">
   <meta http-equiv="refresh" content="300">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Página com Iframes Responsiva</title>
+  <script src="https://static.elfsight.com/platform/platform.js" async></script>
+  <title>SOMENGIL</title>
   <style>
     * {
       box-sizing: border-box;
@@ -44,6 +45,7 @@
 
     .top-full-container,
     .iframe-box,
+    .iframe-box2,
     .side-container,
     .new-appsheet-container {
       background: rgba(255,255,255,0.5);
@@ -139,6 +141,12 @@
       height: 100%;
     }
 
+
+    .iframe-box2 {
+      height: 100%;
+    }
+
+
     iframe {
       width: 100%;
       height: 100%;
@@ -180,6 +188,22 @@
       margin-top: 2px;
     }
     
+    
+.iframe-box2.right-bottom {
+  display: flex;
+  justify-content: center; /* Centraliza horizontalmente */
+  align-items: center; /* Alinha verticalmente */
+  padding: 10px; /* Adiciona padding de 10px */
+  height: 100%; /* Garante que o iframe ocupe toda a altura do container */
+}
+
+.iframe-box2.right-bottom iframe {
+  width: 70%; /* Define a largura como 70% do tamanho real */
+  height: 100%; /* Garante que o iframe ocupe toda a altura disponível */
+  border: none; /* Remove bordas */
+  border-radius: 10px; /* Deixa as bordas arredondadas */
+}
+
     
     /* Aumenta a largura dos containers laterais */
 .left-container, .side-container {
@@ -322,19 +346,35 @@
 
   <div class="iframe-box second-iframe" style="flex: 0 0 28; padding-left: 10px; margin-left: 10px; height:100%">
     <!-- Aqui colocas o conteúdo do novo container -->
-    <iframe src="https://www.exemplo.com" style="width: 100%; height: 100%; border: none;"></iframe>
+<iframe 
+    src="https://54008ab9397e4b52aa190044de2f743c.elf.site"
+    style="border: none; overflow: hidden;">
+  </iframe>
+    
+    
   </div>
 </div>
         </div>
 
-        <!-- Right containers -->
-        <div class="right-container">
-          <div class="iframe-box right-top">
-            <p style="margin:0; text-align:center;">Topo Direito</p>
-          </div>
-          <div class="iframe-box right-bottom">
-            <p style="margin:0; text-align:center;">Fundo Direito</p>
-          </div>
+<!-- Right containers -->
+<div class="right-container">
+  <div class="iframe-box right-top">
+    <p style="margin:0; text-align:center;"></p>
+    
+    <iframe src="https://calendar.google.com/calendar/embed?src=c_d89img0gp1ijoqa6t2bh53hmqs%40group.calendar.google.com&ctz=Europe%2FLisbon" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
+    
+    
+  </div>
+
+<div class="iframe-box2 right-bottom">
+  <iframe 
+    src="">
+  </iframe>
+</div>
+</div>
+
+
+          
         </div>
       </div>
     </div>
