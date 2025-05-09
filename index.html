@@ -176,6 +176,27 @@
       font-size: 0.7rem;
       margin-top: 2px;
     }
+    
+    
+    /* Aumenta a largura dos containers laterais */
+.left-container, .side-container {
+  width: 500px; /* Altera de 200px para 250px ou o valor desejado */
+}
+
+/* Responsividade */
+@media (max-width: 1024px) {
+  .left-container, .side-container {
+    width: 500px; /* Ajuste também para a versão em tablets/desktops */
+  }
+}
+
+@media (max-width: 768px) {
+  .left-container, .side-container {
+    width: 100%; /* Para smartphones, pode continuar a ser 100% ou outra largura desejada */
+  }
+}
+
+    
 
     @media (max-width: 1024px) {
       .left-container, .right-container, .side-container, .new-appsheet-container {
