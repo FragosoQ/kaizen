@@ -89,6 +89,31 @@
       overflow: hidden;
     }
 
+    .left-container {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      width: 350px;
+      height: 100%;
+      flex-shrink: 0;
+    }
+
+    .left-top {
+      flex: 0 0 60%;
+      background: rgba(255,255,255,0.5);
+      border-radius: 15px;
+      padding: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+
+    .left-bottom {
+      flex: 0 0 40%;
+      background: rgba(255,255,255,0.5);
+      border-radius: 15px;
+      padding: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+
     .right-container {
       display: flex;
       flex-direction: column;
@@ -122,10 +147,8 @@
     .center-iframe { flex: 1; }
     .right-top { flex: 1; background: rgba(255,255,255,0.5); }
     .right-bottom { flex: 1; background: rgba(255,255,255,0.5); }
-    .bottom-iframe { height: 10vh; flex: 0 0 auto; margin-bottom: 2vh;margin-top:10px; }
+    .bottom-iframe { height: 10vh; flex: 0 0 auto; margin-bottom: 2vh; margin-top:10px; }
 
-    
-    
     .timer {
       font-size: 1.2rem;
       color: #FFFFFF;
@@ -202,35 +225,35 @@
 
   <div class="page-wrapper">
     <div class="content-wrapper">
-      <div class="top-full-container"> <!--logo-->
+      <div class="top-full-container"> <!-- logo -->
         <img src="https://static.wixstatic.com/media/a6967f_a8e4454dca7e4bd6a2c16ddf22a604e1~mv2.png" alt="Logo">
         <div class="timer-wrapper">
-          
           <div class="timer" id="timer">A carregar...</div>
         </div>
       </div>
 
       <div class="page-content">
-        <div style="display: flex; flex-direction: column; gap: 10px; flex: 1; height: 50vh"> <!--teams-->
-          <div class="new-appsheet-container">
-            <iframe src="https://www.appsheet.com/start/3be9619c-69c2-4b46-bdac-32692f19c2f5"></iframe>
+        <!-- Left containers -->
+        <div class="left-container">
+          <div class="left-top">
+            <iframe src="https://www.appsheet.com/start/3be9619c-69c2-4b46-bdac-32692f19c2f5" title="Appsheet"></iframe>
           </div>
-          
-           <div style="display: flex; flex-direction: column; justify-content: flex-end; height: 500px;">
-  <iframe src="https://calendar.google.com/calendar/embed?src=c_488c1f3d0535a3fd3b4fd8cc7f1c730adf6760f427b2fc126d15ef75d2a8c114%40group.calendar.google.com&ctz=Europe%2FLisbon"></iframe>
-</div>
+          <div class="left-bottom">
+            <iframe src="https://calendar.google.com/calendar/embed?src=c_488c1f3d0535a3fd3b4fd8cc7f1c730adf6760f427b2fc126d15ef75d2a8c114%40group.calendar.google.com&ctz=Europe%2FLisbon" title="Google Calendar"></iframe>
+          </div>
         </div>
 
+        <!-- Main content -->
         <div class="main-container">
-          <div class="iframe-box top-iframe"> <!--planeamento-->
+          <div class="iframe-box top-iframe">
             <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRtIDbzhoFNJbqKwZGSPG-9cVgTS2fXDtcYbagdQh6w9zYGv6rqFVi9iymD4ub6TaO_1rpvQsDjWEow/pubhtml?widget=true&amp;headers=false"></iframe>
           </div>
-          <div class="iframe-box center-iframe"> <!--mapa-->
+          <div class="iframe-box center-iframe">
             <iframe src="https://www.appsheet.com/start/2906038e-208d-4045-94ca-0465d85da34c"></iframe>
           </div>
-        
         </div>
 
+        <!-- Right containers -->
         <div class="right-container">
           <div class="iframe-box right-top">
             <p style="margin:0; text-align:center;">Topo Direito</p>
@@ -242,7 +265,7 @@
       </div>
     </div>
 
-    <div class="bottom-iframe"> <!--GEE-->
+    <div class="bottom-iframe">
       <iframe 
         src="https://lookerstudio.google.com/embed/reporting/46597016-453f-43bf-975b-85f36e84f607/page/p_k37y67z8qd"
         allowfullscreen 
