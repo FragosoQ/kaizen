@@ -43,11 +43,10 @@
     }
 
     .top-full-container,
-    .bottom-iframe,
     .iframe-box,
     .side-container,
     .new-appsheet-container {
-      background: white;
+      background: rgba(255,255,255,0.5);
       border-radius: 15px;
       padding: 10px;
       box-shadow: 0 4px 8px rgba(0,0,0,0.2);
@@ -57,6 +56,17 @@
       position: relative;
     }
 
+
+    .bottom-iframe {
+      background: rgba(255,255,255,0.5);
+      border-radius: 15px;
+      padding: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+    }
     .side-container,
     .new-appsheet-container {
       background: rgba(255,255,255,0.5);
@@ -112,7 +122,7 @@
     .center-iframe { flex: 1; }
     .right-top { flex: 1; background: rgba(255,255,255,0.5); }
     .right-bottom { flex: 1; background: rgba(255,255,255,0.5); }
-    .bottom-iframe { height: 150px; flex: 0 0 auto; margin-bottom: 20px; }
+    .bottom-iframe { height: 20vh; flex: 0 0 auto; margin-bottom: 2vh; }
 
     .timer {
       font-size: 1.2rem;
@@ -190,26 +200,26 @@
 
   <div class="page-wrapper">
     <div class="content-wrapper">
-      <div class="top-full-container">
-        <img src="https://static.wixstatic.com/media/a6967f_eee0d017524f4a48bf2870cc2385c10b~mv2.png" alt="Logo">
+      <div class="top-full-container"> <!--logo-->
+        <img src="https://static.wixstatic.com/media/a6967f_a8e4454dca7e4bd6a2c16ddf22a604e1~mv2.png" alt="Logo">
         <div class="timer-wrapper">
-          <img src="https://static.wixstatic.com/media/a6967f_3021b8bc351d4b899a211ba36f1aafd9~mv2.png" alt="Extra">
+          
           <div class="timer" id="timer">A carregar...</div>
         </div>
       </div>
 
       <div class="page-content">
-        <div style="display: flex; flex-direction: column; gap: 10px; flex: 1;">
+        <div style="display: flex; flex-direction: column; gap: 10px; flex: 1; height: 50vh"> <!--teams-->
           <div class="new-appsheet-container">
             <iframe src="https://www.appsheet.com/start/3be9619c-69c2-4b46-bdac-32692f19c2f5"></iframe>
           </div>
         </div>
 
         <div class="main-container">
-          <div class="iframe-box top-iframe">
+          <div class="iframe-box top-iframe"> <!--planeamento-->
             <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRtIDbzhoFNJbqKwZGSPG-9cVgTS2fXDtcYbagdQh6w9zYGv6rqFVi9iymD4ub6TaO_1rpvQsDjWEow/pubhtml?widget=true&amp;headers=false"></iframe>
           </div>
-          <div class="iframe-box center-iframe">
+          <div class="iframe-box center-iframe"> <!--mapa-->
             <iframe src="https://www.appsheet.com/start/2906038e-208d-4045-94ca-0465d85da34c"></iframe>
           </div>
         </div>
@@ -225,7 +235,7 @@
       </div>
     </div>
 
-    <div class="bottom-iframe">
+    <div class="bottom-iframe"> <!--GEE-->
       <iframe 
         src="https://lookerstudio.google.com/embed/reporting/46597016-453f-43bf-975b-85f36e84f607/page/p_k37y67z8qd"
         allowfullscreen 
