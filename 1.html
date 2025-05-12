@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="refresh" content="300">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://static.elfsight.com/platform/platform.js" async></script>
+  <title>SOMENGIL</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      padding: 10px;
+      height: 100%;
+    }
+
+    body {
+      background-image: url('https://static.wixstatic.com/media/a6967f_10b71864dc8c4562aec1da2611325151~mv2.png');
+      background-size: cover;
+      background-position: center;
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      overflow: hidden;
+    }
+    
+    
+
+    
+
+    .page-wrapper {
+      margin: 0 0px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      height: 100%;
+    }
+
+    .content-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      flex: 1;
+      overflow: hidden;
+    }
+
+    .top-full-container,
+    .iframe-box,
+    .iframe-box2,
+    .side-container,
+    .new-appsheet-container, .bottom-iframe  {
+      background: rgba(255,255,255,0.5);
+      border-radius: 15px;
+      padding: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+    }
+
+.bottom-iframe {
+  background: rgba(255,255,255,0.5);
+  border-radius: 15px;
+  padding: 10px; /* padding interno */
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  height: 500px; /* ou outro valor que pretendas para o container */
+  box-sizing: border-box;
+}
+
+.bottom-iframe iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-radius: 10px; /* para manter o arredondado interno */
+}
+
+
+    .side-container,
+    .new-appsheet-container {
+      background: rgba(255,255,255,0.5);
+      flex: 1;
+      margin-left: 0px;
+      flex-shrink: 0;
+    }
+
+    .top-full-container img {
+      max-width: 100%;
+      height: auto;
+      max-height: 100px;
+    }
+
+    .page-content {
+      display: flex;
+      gap: 10px;
+      width: 100%;
+      flex: 1;
+      overflow: hidden;
+    }
+
+    .left-container {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      width: 350px;
+      height: 100%;
+      flex-shrink: 0;
+    }
+
+    .left-top {
+      flex: 0 0 100%;
+      background: rgba(255,255,255,0.5);
+      border-radius: 15px;
+      padding: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+    
+ 
+    
+
+    .left-bottom {
+      flex: 0 0 40%;
+      background: rgba(255,255,255,0.5);
+      border-radius: 15px;
+      padding: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+
+    .right-container {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      width: 350px;
+      height: 100%;
+      flex-shrink: 0;
+    }
+
+    .main-container {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      height: 100%;
+      min-width: 0;
+    }
+
+    .iframe-box {
+      height: 100%;
+    }
+
+
+    .iframe-box2 {
+      height: 100%;
+    }
+
+
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      border-radius: 10px;
+    }
+
+    .top-iframe { flex: 0 0 30%; }
+    .center-iframe { flex: 1; }
+    .right-top { flex: 1; background: rgba(255,255,255,0.5); }
+    .right-bottom { flex: 1; background: rgba(255,255,255,0.5); }
+  .bottom-iframe {  height: 14vh;  flex: 0 0 auto;  margin-top: 10px;  margin-bottom: 2vh;
+}
+
+    .timer {
+      font-size: 1.5rem;
+      color: #FFFFFF;
+      display: flex;
+      gap: 10px;
+      margin-left: auto;
+      margin-right: 10px;
+    }
+
+    .time-block {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .box {
+      background-color: #97c7d2;
+      padding: 5px 10px;
+      border-radius: 8px;
+      min-width: 40px;
+    }
+
+    .label {
+      color: white;
+      font-size: 0.7rem;
+      margin-top: 2px;
+    }
+    
+    
+.iframe-box2.right-bottom {
+  display: flex;
+  justify-content: center; /* Centraliza horizontalmente */
+  align-items: center; /* Alinha verticalmente */
+  padding: 10px; /* Adiciona padding de 10px */
+  height: 100%; /* Garante que o iframe ocupe toda a altura do container */
+}
+
+.iframe-box2.right-bottom iframe {
+  width: 70%; /* Define a largura como 70% do tamanho real */
+  height: 100%; /* Garante que o iframe ocupe toda a altura disponível */
+  border: none; /* Remove bordas */
+  border-radius: 10px; /* Deixa as bordas arredondadas */
+}
+
+    
+    /* Aumenta a largura dos containers laterais */
+.left-container, .side-container {
+  width: 400px; /* Altera de 200px para 250px ou o valor desejado */
+}
+
+/* Responsividade */
+@media (max-width: 1024px) {
+  .left-container, .side-container {
+    width: 100%; /* Ajuste também para a versão em tablets/desktops */
+  }
+}
+
+@media (max-width: 768px) {
+  .left-container, .side-container {
+    width: 100%; /* Para smartphones, pode continuar a ser 100% ou outra largura desejada */
+  }
+}
+
+    
+
+    @media (max-width: 1024px) {
+      .left-container, .right-container, .side-container, .new-appsheet-container {
+        width: 200px;
+      }
+      .top-iframe { flex: 0 0 25%; }
+    }
+
+    @media (max-width: 768px) {
+      .page-content {
+        flex-direction: column;
+        overflow-y: auto;
+      }
+      .left-container, .right-container, .side-container, .main-container, .new-appsheet-container {
+        width: 100%;
+        height: auto;
+      }
+      .top-full-container, .bottom-iframe {
+        margin: 0 0;
+      }
+      body {
+        height: auto;
+        overflow: visible;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .top-full-container img {
+        max-height: 60px;
+      }
+      .bottom-iframe { height: 80px; }
+    }
+
+    .timer-wrapper {
+      display: flex;
+      align-items: center;
+      margin-left: auto;
+    }
+
+    .extra-image {
+      height: 10px;
+      margin-right: 20px;
+    }
+    
+    
+.top-full-container {
+  display: flex;
+  align-items: center; /* alinhamento vertical do logo e do timer-container */
+}
+
+/* A logo fica à esquerda, fora do timer-container */
+.logo {
+  max-height: 100px;
+  margin-right: ; /* espaço entre logo e o timer-container */
+}
+
+/* Container do timer e imagem lado a lado */
+.timer-container {
+  display: flex;
+  align-items: center; /* alinhamento vertical */
+  margin-right: -20px;
+}
+
+/* A imagem ao lado do timer, com 25% do tamanho original */
+.side-image {
+  width: 20%; /* 25% do tamanho original */
+  max-height: 100px; /* limite de altura */
+  margin-right: 10px; /* margem de 10px à direita da imagem */
+}
+
+.timer {
+  flex: 1; /* ocupa a outra parte igual do espaço */
+}
+    
+    
+  </style>
+</head>
+<body>
+
+  <div class="page-wrapper">
+    <div class="content-wrapper">
+    
+<div class="top-full-container">
+  <img src="https://static.wixstatic.com/media/a6967f_a8e4454dca7e4bd6a2c16ddf22a604e1~mv2.png" alt="Logo" class="logo">
+  
+  <!-- Logo original ao lado esquerdo do timer -->
+  <div class="timer-container">
+    <!-- Nova imagem ao lado esquerdo do timer -->
+    <img class="side-image" src="https://static.wixstatic.com/media/a6967f_3021b8bc351d4b899a211ba36f1aafd9~mv2.png" alt="Imagem lateral">
+    
+    <!-- Timer -->
+    <div class="timer" id="timer">A carregar...</div>
+  </div>
+</div>
+
+
+      <div class="page-content">
+        <!-- Left containers -->
+        <div class="left-container">
+          <div class="left-top">
+            <iframe src="https://www.appsheet.com/start/3be9619c-69c2-4b46-bdac-32692f19c2f5#appName=CHECKINSOMENGIL-303283118&control=Team%20Management"></iframe>
+          </div>
+          <!--<div class="left-bottom">
+            <iframe src="https://calendar.google.com/calendar/embed?src=c_488c1f3d0535a3fd3b4fd8cc7f1c730adf6760f427b2fc126d15ef75d2a8c114%40group.calendar.google.com&ctz=Europe%2FLisbon" title="Google Calendar"></iframe>
+          </div>-->
+        </div>
+
+        <!-- Main content -->
+        <div class="main-container">
+        
+<div class="iframe-box top-iframe" style="flex: 0 0 50%;">
+  <iframe src="https://www.appsheet.com/start/d1161b08-3cd5-4e54-a8b0-5a4c54422dbf" style="width: 100%; height: 100%; border: none;"></iframe>
+</div>
+        
+        
+<div style="display: flex; width: 100%; height: 100%">
+  <div class="iframe-box top-iframe" style="flex: 0 0 70%">
+    <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRtIDbzhoFNJbqKwZGSPG-9cVgTS2fXDtcYbagdQh6w9zYGv6rqFVi9iymD4ub6TaO_1rpvQsDjWEow/pubhtml?widget=true&amp;headers=false" style="width: 100%; height: 100%; border: none;"></iframe>
+  </div>
+
+  <div class="iframe-box second-iframe" style="flex: 0 0 50; padding-left: px; margin-left: 10px; height:100%">
+    <!-- Aqui colocas o conteúdo do novo container -->
+<iframe 
+    src="https://54008ab9397e4b52aa190044de2f743c.elf.site"
+    style="border: none; overflow: hidden;">
+  </iframe>
+    
+    
+  </div>
+</div>
+        </div>
+
+<!-- Right containers -->
+<div class="right-container">
+  <div class="iframe-box right-top">
+    <p style="margin:0; text-align:center;"></p>
+    
+    <iframe src="https://calendar.google.com/calendar/embed?src=c_d89img0gp1ijoqa6t2bh53hmqs%40group.calendar.google.com&ctz=Europe%2FLisbon" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
+    
+    
+  </div>
+
+
+
+<div class="iframe-box2 right-bottom" style="
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  overflow: hidden;
+">
+
+  <!-- Imagem de fundo (direita) -->
+  <img 
+    src="https://static.wixstatic.com/media/a6967f_57a8d2b6c06a4b819541a54cab7694f4~mv2.png" 
+    alt="Imagem de Fundo" 
+    style="
+      position: absolute;
+      right: 0px;
+      bottom: 0px;
+      width: calc(70% - 60px);
+      height: calc(70% - 60px);
+      object-fit: cover;
+      z-index: 0;
+      opacity: 0.9;
+      pointer-events: none;
+    " 
+  />
+
+  <!-- Imagem sobreposta e centrada (.png) rec cin-->
+  <img 
+    src="https://static.wixstatic.com/media/a6967f_cd7dffc1101249dc845bc7b9f3c4798e~mv2.png"
+    alt="Imagem Sobreposta"
+    style="
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      max-width: calc(100% - 0px);
+      max-height: calc(100% - 0px);
+      z-index: 1;
+    "
+  />
+
+    <!-- SVG dentro de um container limitado à área da imagem .png -->
+    <div style="
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 70%; /* Define um tamanho fixo mais visível */
+      height: 50%;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+    ">
+      <img 
+        src="https://static.wixstatic.com/shapes/a6967f_cb978e9a73a24ef888aff3cc7883300a.svg"
+        alt="Imagem Sobreposta 2"
+        style="
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+        "
+      />
+    </div>
+
+  <!-- Título sobreposto e centrado -->
+  <h2 style="
+    position: absolute;
+    top: 10%;
+    left: 90px;
+    transform: translateX(-50%);
+    margin: 0;
+    color: white;
+    font-family: sans-serif;
+    padding: 8px 12px;
+    border-radius: 6px;
+    z-index: 2;
+  ">
+    Bem Vindos
+  </h2>
+
+</div>
+
+
+
+
+
+
+
+</div>
+
+
+          
+        </div>
+      </div>
+    </div>
+
+    <div class="bottom-iframe">
+      <iframe 
+        src="https://lookerstudio.google.com/embed/reporting/46597016-453f-43bf-975b-85f36e84f607/page/p_k37y67z8qd"
+        allowfullscreen 
+        sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox">
+      </iframe>
+    </div>
+  </div>
+
+  <script>
+    const startDate = new Date(2024, 2, 24, 0, 0, 0);
+
+    function updateTimer() {
+      const now = new Date();
+      const diff = now - startDate;
+
+      if (diff < 0) {
+        document.getElementById('timer').innerHTML = "Ainda não começou!";
+        return;
+      }
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((diff / (1000 * 60)) % 60);
+      const seconds = Math.floor((diff / 1000) % 60);
+
+      document.getElementById('timer').innerHTML = `
+        <div class="time-block">
+          <div class="box">${days}</div>
+          <div class="label">days</div>
+        </div>
+        <div class="time-block">
+          <div class="box">${hours}</div>
+          <div class="label">hours</div>
+        </div>
+        <div class="time-block">
+          <div class="box">${minutes}</div>
+          <div class="label">min</div>
+        </div>
+        <div class="time-block">
+          <div class="box">${seconds}</div>
+          <div class="label">sec</div>
+        </div>
+      `;
+    }
+    setInterval(updateTimer, 1000);
+  </script> 
+</body>
+</html>
