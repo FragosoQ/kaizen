@@ -436,7 +436,7 @@
     " 
   />
 
-  <!-- Imagem sobreposta e centrada (.png) rec cin -->
+  <!-- Imagem sobreposta -->
   <img 
     src="https://static.wixstatic.com/media/a6967f_47b7d4337cb34b21bb40d1290ebef7f1~mv2.png"
     alt="Imagem Sobreposta"
@@ -452,35 +452,10 @@
     "
   />
 
-  <!-- SVG dentro de um container limitado -->
-  <div style="
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 70%;
-      height: 50%;
-      z-index: 2;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      pointer-events: none;
-    ">
-    <!--<img 
-      src="https://static.wixstatic.com/shapes/a6967f_cb978e9a73a24ef888aff3cc7883300a.svg"
-      alt="Imagem Sobreposta 2"
-      style="
-        width: 100%;
-        height: 100%;
-        object-fit: contain;
-      "
-    />-->
-  </div>
-
   <!-- Imagem carregada dinamicamente -->
   <img id="imagemCarregada" src="" alt="Imagem Carregada" style="
     position: absolute;
-    top: 50%;
+    top: 60%;
     left: 50%;
     transform: translate(-50%, -50%);
     max-width: 60%;
@@ -494,24 +469,21 @@
   <!-- Input invisível para upload -->
   <input type="file" id="uploadImagem" accept="image/*" style="display: none;" />
 
-  <!-- Título clicável para ativar upload -->
-  <h2 id="botaoUpload" style="
-    position: absolute;
-    top: 5%;
-    left: 90px;
-    transform: translateX(-50%);
-    margin: 0;
-    color: white;
-    font-family: sans-serif;
-    padding: 8px 12px;
-    border-radius: 6px;
-    z-index: 4;
-    cursor: pointer;
-  ">
-    Bem Vindos
-  </h2>
-
-</div>
+  <!-- Título visível, emoji clicável -->
+<h2 style="
+  position: absolute;
+  top: 5%;
+  left: 10px;
+  margin: 0;
+  color: white;
+  font-family: sans-serif;
+  padding: 8px 12px;
+  border-radius: 6px;
+  z-index: 4;
+">
+  <span contenteditable="true" spellcheck="false" style="outline: none;">Bem Vindos</span>
+  <span id="botaoUpload" style="cursor: pointer;">👋</span>
+</h2>
 
 </div>
 
