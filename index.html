@@ -319,9 +319,53 @@
 }
     
     
+    
+    /* Estilos do modal */
+.modal {
+  display: none; /* Escondido por padrão */
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.6);
+}
+
+.modal-content {
+  background-color: #fff;
+  margin: 5% auto;
+  padding: 20px;
+  width: 90%;
+  max-width: 1000px;
+  border-radius: 8px;
+  position: relative;
+}
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+    
+    
+    
   </style>
 </head>
 <body>
+
+<!-- Modal de visualização do Google Sheets -->
+<div id="meuModal" class="modal">
+  <div class="modal-content">
+    <span class="close" id="closeModal">&times;</span>
+    <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQhdwqlBJCLBu4UosgSEHj20zvHMIjlMlUL9M-0e37QO8RiX0x5jGNZn1Y4KC77iEfB4OHHzIaWTWOq/pubhtml" style="width:100%; height:80vh; border:none;"></iframe>
+  </div>
+</div>
+
 
   <div class="page-wrapper">
     <div class="content-wrapper">
@@ -452,19 +496,7 @@
     "
   />
 
-  <!-- Imagem carregada dinamicamente -->
-  <img id="imagemCarregada" src="" alt="Imagem Carregada" style="
-    position: absolute;
-    top: 60%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    max-width: 60%;
-    max-height: 60%;
-    z-index: 3;
-    display: none;
-    border-radius: 8px;
-    box-shadow: 0 0 12px rgba(0,0,0,0.5);
-  " />
+
 
   <!-- Input invisível para upload -->
   <input type="file" id="uploadImagem" accept="image/*" style="display: none;" />
@@ -484,6 +516,23 @@
   <span contenteditable="true" spellcheck="false" style="outline: none;">Bem Vindos</span>
   <span id="botaoUpload" style="cursor: pointer;">👋</span>
 </h2>
+
+  <!-- Imagem a substituir -->
+  <img 
+    src=""
+    alt=""
+    style="
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      max-width: calc(100% - 0px);
+      max-height: calc(100% - 0px);
+      z-index: 1;
+      height: 140%;
+    "
+  />
+
 
 </div>
 
@@ -567,30 +616,55 @@
   });
 </script>
   
-  
   <script>
-  const inputUpload = document.getElementById('uploadImagem');
-  const imagemCarregada = document.getElementById('imagemCarregada');
-  const botaoUpload = document.getElementById('botaoUpload');
+  const modal = document.getElementById('meuModal');
+  const closeBtn = document.getElementById('closeModal');
 
-  botaoUpload.addEventListener('click', () => {
-    inputUpload.click();
+  // Quando clicar no emoji 👋
+  document.getElementById('botaoUpload').addEventListener('click', () => {
+    modal.style.display = 'block';
   });
 
-  inputUpload.addEventListener('change', function () {
-    const ficheiro = this.files[0];
-    if (ficheiro) {
-      const reader = new FileReader();
-      reader.onload = function (e) {
-        imagemCarregada.src = e.target.result;
-        imagemCarregada.style.display = 'block';
-      };
-      reader.readAsDataURL(ficheiro);
+  // Quando clicar no botão fechar
+  closeBtn.onclick = () => {
+    modal.style.display = 'none';
+  };
+
+  // Clicar fora do conteúdo também fecha
+  window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.style.display = 'none';
     }
-  });
+  };
 </script>
 
-  
+
+  <script>
+  // Código existente...
+
+  // Código para atualizar o timer
+  // ... (seu código do timer aqui)
+
+  // Código para o upload de imagem
+  // ... (seu código do upload aqui)
+
+  // **Adicione aqui a escuta de mensagens**
+  window.addEventListener('message', (event) => {
+    // Para segurança, você pode verificar o origin se souber o domínio esperado
+    // if (event.origin !== 'https://seu-dominio.com') return;
+
+    if (typeof event.data === 'string' && event.data.startsWith('imagem:')) {
+      const srcUrl = event.data.replace('imagem:', '');
+      setImagem(srcUrl);
+    }
+  });
+
+  // Sua função setImagem
+  function setImagem(srcUrl) {
+    document.querySelector('img[alt=""]').src = srcUrl;
+    document.getElementById('meuModal').style.display = 'none';
+  }
+</script>
   
 </body>
 </html>
