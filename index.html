@@ -459,24 +459,117 @@
   </div>
         
         
+<!-- Janela com o segundo Google Sheets (toggle) -->
+<div id="janela-sheets2" style="
+  display: none;
+  position: fixed;
+  top: 60px;
+  left: 350px;
+  width: 600px;
+  height: 400px;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 0 12px rgba(0,0,0,0.3);
+  z-index: 9999;
+  overflow: hidden;
+">
+  <!-- Botão Voltar -->
+  <button onclick="voltarSheets2()" style="
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 1000;
+    padding: 8px 12px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  ">
+    X
+  </button>
+  
+  <!-- iframe com o Google Sheets -->
+  <iframe 
+    src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRs-xYIXOl3MNNijn0LTruvXoHObIhCsNn5AfXsj2ZAQl7WG7z3omM8b1TAYIu-w3a8ytfOgFtFogrR/pubhtml?widget=true&amp;headers=false" 
+    width="100%" 
+    height="100%" 
+    frameborder="0"
+    style="border: 0;"
+  ></iframe>
+</div>
+
+
+
 
         
-          <div style="display: flex; width: 100%; height: 450px">
-            <div class="iframe-box top-iframe" style="flex: 0 0 70%">
-              <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRtIDbzhoFNJbqKwZGSPG-9cVgTS2fXDtcYbagdQh6w9zYGv6rqFVi9iymD4ub6TaO_1rpvQsDjWEow/pubhtml?widget=true&amp;headers=false" style="width: 100%; height: 100%; border: none;"></iframe>
-            </div>
+<div style="display: flex; width: 100%; height: 450px">
+  <div class="iframe-box top-iframe" style="flex: 0 0 70%">
+    <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRtIDbzhoFNJbqKwZGSPG-9cVgTS2fXDtcYbagdQh6w9zYGv6rqFVi9iymD4ub6TaO_1rpvQsDjWEow/pubhtml?widget=true&amp;headers=false" style="width: 100%; height: 100%; border: none;"></iframe>
+  </div>
 
-<div class="iframe-box second-iframe" style="flex: 1; margin-left: 10px; height:100%; position: relative; overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center;">
-
-  <!-- Título e emoji clicável -->
-  <h2 style="position: absolute; top: 10px; left: 10px; font-size: 24px; font-weight: bold; color: white; cursor: pointer;" id="uploadTrigger">
-    Somengil Win's 🏆
-  </h2>
-
-</div>
+  <div class="iframe-box second-iframe" style="flex: 1; margin-left: 10px; height:100%; position: relative; overflow: hidden; display: flex; flex-direction: column; align-items: center; justify-content: center;">
   
-		  </div>
+  <!-- Imagem sobreposta -->
+  <div id="overlay-container2" class="overlay-container2" style="
+  position: absolute;
+  top: 60px;
+  bottom: 20px;
+  left: 20px;
+  right: 20px;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+">
+  <img 
+  id="overlay-image2"
+  src="https://static.wixstatic.com/media/a6967f_47b7d4337cb34b21bb40d1290ebef7f1~mv2.png"
+  alt="Imagem Sobreposta"
+  style="
+    max-width: 140%;
+    max-height: 100%;
+    object-fit: contain;
+    border-radius: 16px;
+  "
+  />
+  </div>
+
+
+  
+    <!-- Título com emoji -->
+    <h2 style="position: absolute; top: 5%; left: 10px; margin: 0; color: white; font-family: sans-serif; padding: 8px 12px; border-radius: 6px; z-index: 4;">
+      <span contenteditable="true" spellcheck="false" style="outline: none;">Somengil Win's</span>
+      <!-- Botões 🏆 e 📁 -->
+      <span class="botao" onclick="toggleJanelaInput2()" style="cursor: pointer; z-index: 9999;">🏆</span>
+      <span class="botao" onclick="toggleJanelaSheets2()" style="margin-left: 10px;">📁</span>
+    </h2>
+  </div>
 </div>
+
+<!-- Container para o input da imagem 🏆 -->
+<div id="janela-input2" style="display: none; position: fixed; top: 20%; left: 50%; transform: translate(-50%, -50%); z-index: 9999; background: white; padding: 20px; border-radius: 10px;">
+  <input type="text" id="image-url-input2" placeholder="Insere o URL da imagem" style="width: 300px;">
+  <button onclick="updateImage2()">Atualizar</button>
+</div>
+
+<!-- Overlay para exibir a imagem -->
+<div id="overlay-container2" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); justify-content: center; align-items: center; z-index: 9998;">
+  <img id="overlay-image2" src="" style="max-width: 90%; max-height: 90%;">
+  <button onclick="closeOverlay2()" style="position: absolute; top: 20px; right: 20px;">Fechar</button>
+</div>
+
+<!-- Container para o iframe do 📁 -->
+<div id="janela-sheets2" style="display: none; position: fixed; top: 5%; left: 5%; width: 90%; height: 90%; background: white; border-radius: 10px; z-index: 9999; box-shadow: 0 0 15px rgba(0,0,0,0.5);">
+  <div style="display: flex; justify-content: flex-end; padding: 10px;">
+    <button onclick="voltarSheets2()">X</button>
+  </div>
+  <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRs-xYIXOl3MNNijn0LTruvXoHObIhCsNn5AfXsj2ZAQl7WG7z3omM8b1TAYIu-w3a8ytfOgFtFogrR/pubhtml?gid=0&single=true" style="width: 100%; height: 90%; border: none;"></iframe>
+</div>
+
+		</div>
 
 
 <!-- Right containers -->
@@ -533,7 +626,7 @@
     <input type="text" id="image-url-input" placeholder="Insere URL da imagem" style="width: 300px;" />
     <button onclick="updateImage()">Incluir</button>
     <button onclick="closeOverlay()">Fechar</button>
-    <button onclick="voltar()">Voltar</button> <!-- Botão para voltar -->
+ 
   </div>
 
   <!-- Imagem sobreposta -->
@@ -715,6 +808,39 @@ function voltarSheets() {
 }
   
 </script>
+
+
+
+<script>
+  function toggleJanelaInput2() {
+    const janela = document.getElementById("janela-input2");
+    janela.style.display = (janela.style.display === "none" || janela.style.display === "") ? "block" : "none";
+  }
+
+  function updateImage2() {
+    const url = document.getElementById("image-url-input2").value;
+    if (url) {
+      document.getElementById("overlay-image2").src = url;
+      document.getElementById("overlay-container2").style.display = "flex";
+      document.getElementById("janela-input2").style.display = "none"; // Fecha após incluir
+    }
+  }
+
+  function closeOverlay2() {
+    document.getElementById("overlay-container2").style.display = "none";
+    document.getElementById("janela-input2").style.display = "none";
+  }
+
+  function toggleJanelaSheets2() {
+    const janela = document.getElementById("janela-sheets2");
+    janela.style.display = (janela.style.display === "none" || janela.style.display === "") ? "block" : "none";
+  }
+
+  function voltarSheets2() {
+    document.getElementById("janela-sheets2").style.display = "none";
+  }
+</script>
+
 
 
   
