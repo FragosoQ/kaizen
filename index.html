@@ -516,24 +516,25 @@
   position: absolute;
   top: 60px;
   bottom: 20px;
-  left: 20px;
-  right: 20px;
+  left: 50%;
+  transform: translateX(-50%);
   z-index: 1;
   display: flex;
   align-items: center;
   justify-content: center;
+  width: calc(100% - 40px);
   pointer-events: none;
 ">
   <img 
-  id="overlay-image2"
-  src="https://static.wixstatic.com/media/a6967f_47b7d4337cb34b21bb40d1290ebef7f1~mv2.png"
-  alt="Imagem Sobreposta"
-  style="
-    max-width: 140%;
-    max-height: 100%;
-    object-fit: contain;
-    border-radius: 16px;
-  "
+    id="overlay-image2"
+    src="https://static.wixstatic.com/media/a6967f_47b7d4337cb34b21bb40d1290ebef7f1~mv2.png"
+    alt="Imagem Sobreposta"
+    style="
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      border-radius: 16px;
+    "
   />
   </div>
 
