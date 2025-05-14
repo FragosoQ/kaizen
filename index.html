@@ -517,21 +517,22 @@
   <span id="botaoUpload" style="cursor: pointer;">👋</span>
 </h2>
 
-  <!-- Imagem a substituir -->
-  <img 
-    src=""
-    alt=""
-    style="
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      max-width: calc(100% - 0px);
-      max-height: calc(100% - 0px);
-      z-index: 1;
-      height: 140%;
-    "
-  />
+<!-- Imagem a substituir (com id para facilitar a seleção) -->
+<img 
+  id="imagemParaSubstituir"
+  src=""
+  alt=""
+  style="
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: calc(100% - 0px);
+    max-height: calc(100% - 0px);
+    z-index: 1;
+    height: 140%;
+  "
+/>
 
 
 </div>
@@ -592,79 +593,91 @@
   
   
   
-  <script>
-  // Referências aos elementos
-  const uploadTrigger = document.getElementById("uploadTrigger");
-  const imageInput = document.getElementById("imageUpload");
-  const imageContainer = document.getElementById("uploadedImageContainer");
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    // Referências aos elementos principais
+    const uploadTrigger = document.getElementById("uploadTrigger");
+    const imageInput = document.getElementById("imageUpload");
+    const imageContainer = document.getElementById("uploadedImageContainer");
+    const modal = document.getElementById('meuModal');
+    const closeBtn = document.getElementById('closeModal');
+    const botaoUpload = document.getElementById('botaoUpload');
+    const imagemParaSubstituir = document.getElementById('imagemParaSubstituir');
 
-  // Ao clicar no emoji 🏆, abre o seletor de ficheiros
-  uploadTrigger.addEventListener("click", () => {
-    imageInput.click();
-  });
-
-  // Quando o utilizador escolhe uma imagem
-  imageInput.addEventListener("change", function () {
-    const file = this.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = function (e) {
-        imageContainer.innerHTML = `<img src="${e.target.result}" style="max-width: 100%; max-height: 400px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.5);">`;
-      };
-      reader.readAsDataURL(file);
+    // Função para trocar a imagem de um elemento específico
+    function setImagem(srcUrl) {
+      if (imagemParaSubstituir) {
+        imagemParaSubstituir.src = srcUrl;
+      } else {
+        console.warn('Elemento com id "imagemParaSubstituir" não encontrado.');
+      }
+      // Fecha o modal
+      if (modal) {
+        modal.style.display = 'none';
+      }
     }
+
+    // Evento: clicar no emoji 🏆 para abrir o seletor de ficheiros
+    if (uploadTrigger && imageInput) {
+      uploadTrigger.addEventListener("click", () => {
+        imageInput.click();
+      });
+    }
+
+    // Evento: ao selecionar uma imagem
+    if (imageInput && imageContainer) {
+      imageInput.addEventListener("change", function () {
+        const file = this.files[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = function (e) {
+            imageContainer.innerHTML = `<img src="${e.target.result}" style="max-width: 100%; max-height: 400px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.5);">`;
+          };
+          reader.readAsDataURL(file);
+        }
+      });
+    }
+
+    // Evento: clicar no emoji 👋 para abrir o modal
+    if (botaoUpload) {
+      botaoUpload.addEventListener('click', () => {
+        if (modal) {
+          modal.style.display = 'block';
+        }
+      });
+    }
+
+    // Evento: fechar o modal ao clicar no botão de fechar
+    if (closeBtn) {
+      closeBtn.addEventListener('click', () => {
+        if (modal) {
+          modal.style.display = 'none';
+        }
+      });
+    }
+
+    // Evento: clicar fora do modal para fechar
+    window.addEventListener('click', (event) => {
+      if (modal && event.target == modal) {
+        modal.style.display = 'none';
+      }
+    });
+
+    // Evento: receber mensagens do iframe
+    window.addEventListener('message', (event) => {
+      // Opcional: verificar event.origin para segurança
+      // if (event.origin !== 'https://seu-dominio.com') return;
+
+      if (typeof event.data === 'string' && event.data.startsWith('imagem:')) {
+        const srcUrl = event.data.replace('imagem:', '');
+        setImagem(srcUrl);
+      }
+    });
   });
 </script>
+
+
   
-  <script>
-  const modal = document.getElementById('meuModal');
-  const closeBtn = document.getElementById('closeModal');
-
-  // Quando clicar no emoji 👋
-  document.getElementById('botaoUpload').addEventListener('click', () => {
-    modal.style.display = 'block';
-  });
-
-  // Quando clicar no botão fechar
-  closeBtn.onclick = () => {
-    modal.style.display = 'none';
-  };
-
-  // Clicar fora do conteúdo também fecha
-  window.onclick = function(event) {
-    if (event.target == modal) {
-      modal.style.display = 'none';
-    }
-  };
-</script>
-
-
-  <script>
-  // Código existente...
-
-  // Código para atualizar o timer
-  // ... (seu código do timer aqui)
-
-  // Código para o upload de imagem
-  // ... (seu código do upload aqui)
-
-  // **Adicione aqui a escuta de mensagens**
-  window.addEventListener('message', (event) => {
-    // Para segurança, você pode verificar o origin se souber o domínio esperado
-    // if (event.origin !== 'https://seu-dominio.com') return;
-
-    if (typeof event.data === 'string' && event.data.startsWith('imagem:')) {
-      const srcUrl = event.data.replace('imagem:', '');
-      setImagem(srcUrl);
-    }
-  });
-
-  // Sua função setImagem
-  function setImagem(srcUrl) {
-    document.querySelector('img[alt=""]').src = srcUrl;
-    document.getElementById('meuModal').style.display = 'none';
-  }
-</script>
   
 </body>
 </html>
