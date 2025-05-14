@@ -473,13 +473,6 @@
     Somengil Win's 🏆
   </h2>
 
-  <!-- Input invisível para upload -->
-  <input type="file" id="imageUpload" accept="image/*" style="display: none;" />
-
-  <!-- Container da imagem carregada -->
-  <div id="uploadedImageContainer" style="margin-top: 60px; text-align: center;">
-    <!-- A imagem carregada será mostrada aqui -->
-  </div>
 </div>
   
 		  </div>
@@ -525,10 +518,28 @@
 
 
 
+  <!-- Janela de input escondida por defeito -->
+  <div id="janela-input" style="
+    display: none;
+    position: fixed;
+    top: 60px;
+    left: 20px;
+    z-index: 9999;
+    background: white;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  ">
+    <input type="text" id="image-url-input" placeholder="Insere URL da imagem" style="width: 300px;" />
+    <button onclick="updateImage()">Incluir</button>
+    <button onclick="closeOverlay()">Fechar</button>
+    <button onclick="voltar()">Voltar</button> <!-- Botão para voltar -->
+  </div>
+
   <!-- Imagem sobreposta -->
-  <div class="overlay-container" style="
+  <div id="overlay-container" class="overlay-container" style="
     position: absolute;
-    top: 50%;
+    top: 60%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 1;
@@ -537,84 +548,39 @@
     justify-content: center;
     width: 100%;
     height: 100%;
-    pointer-events: none; /* remove se quiseres interatividade */
+    pointer-events: none;
   ">
     <img 
+      id="overlay-image"
       src="https://static.wixstatic.com/media/a6967f_47b7d4337cb34b21bb40d1290ebef7f1~mv2.png"
       alt="Imagem Sobreposta"
       style="
-        max-width: 100%;
-        max-height: 100%;
-        height: 140%;
+        max-width: calc(100% - 40px);
+        max-height: 300px;
+        margin: 0 20px;
+        object-fit: contain;
+        border-radius: 16px;
       "
     />
   </div>
 
-
-
-  <!-- Input invisível para upload -->
-  <input type="file" id="uploadImagem" accept="image/*" style="display: none;" />
-
-  <!-- Título visível, emoji clicável -->
-<h2 style="
-  position: absolute;
-  top: 5%;
-  left: 10px;
-  margin: 0;
-  color: white;
-  font-family: sans-serif;
-  padding: 8px 12px;
-  border-radius: 6px;
-  z-index: 4;
-">
-  <span contenteditable="true" spellcheck="false" style="outline: none;">Bem Vindos</span>
-
-
-  <!-- Botões -->
-  <span id="botaoUpload" class="botao">👋</span>
-  <span id="botaoFicheiro" class="botao">📁</span>
-
-  <!-- Modal 1: URL -->
-  <div id="modalURL" class="modal">
-    <div class="modal-content">
-      <span class="close" id="fecharModalURL">&times;</span>
-      <h3>Introduz o link</h3>
-      <input type="url" id="urlInput" placeholder="https://exemplo.pt" />
-      <button id="inserirURL">Substituir imagem</button>
-    </div>
-  </div>
-
-  <!-- Modal 2: Google Sheets -->
-  <div id="modalFicheiro" class="modal">
-    <div class="modal-content">
-      <span class="close" id="fecharModalFicheiro">&times;</span>
-      <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQhdwqlBJCLBu4UosgSEHj20zvHMIjlMlUL9M-0e37QO8RiX0x5jGNZn1Y4KC77iEfB4OHHzIaWTWOq/pubhtml"></iframe>
-    </div>
-  </div>
-
-
-</h2>
-
-  <!-- Imagem a substituir -->
-  <!--<img id="imagemParaSubstituir" src="" alt="" />-->
-
-<!-- Imagem a substituir (com id para facilitar a seleção) -->
-<img 
-  id="imagemParaSubstituir"
-  src=""
-  alt=""
-  style="
+  <!-- Título com emoji -->
+  <h2 style="
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    max-width: calc(100% - 0px);
-    max-height: calc(100% - 0px);
-    z-index: 1;
-    height: 140%;
-  "
-/>
-
+    top: 5%;
+    left: 10px;
+    margin: 0;
+    color: white;
+    font-family: sans-serif;
+    padding: 8px 12px;
+    border-radius: 6px;
+    z-index: 4;
+  ">
+    <span contenteditable="true" spellcheck="false" style="outline: none;">Bem Vindos</span>
+      <!-- Botão para abrir a janela de input -->
+  <span class="botao" onclick="toggleJanelaInput()" style="cursor: pointer;z-index: 9999;">👋</span>
+<span class="botao" onclick="toggleJanelaSheets()" style="margin-left: 10px;">📁</span>
+  </h2>
 
 </div>
 
@@ -623,6 +589,49 @@
         </div>
       </div>
     </div>
+
+<!-- Janela com Google Sheets (toggle) -->
+<div id="janela-sheets" style="
+  display: none;
+  position: fixed;
+  top: 60px;
+  left: 350px;
+  width: 600px;
+  height: 400px;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 0 12px rgba(0,0,0,0.3);
+  z-index: 9999;
+  overflow: hidden;
+">
+
+  <!-- Botão Voltar -->
+  <button onclick="voltarSheets()" style="
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 1000;
+    padding: 8px 12px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  ">
+    X
+  </button>
+  
+  
+  <iframe 
+    src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQhdwqlBJCLBu4UosgSEHj20zvHMIjlMlUL9M-0e37QO8RiX0x5jGNZn1Y4KC77iEfB4OHHzIaWTWOq/pubhtml?widget=true&amp;headers=false" 
+    width="100%" 
+    height="100%" 
+    frameborder="0"
+    style="border: 0;"
+  ></iframe>
+</div>
+
 
     <div class="bottom-iframe">
       <iframe 
@@ -675,89 +684,37 @@
   
   
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    // Referências aos elementos principais
-    const uploadTrigger = document.getElementById("uploadTrigger");
-    const imageInput = document.getElementById("imageUpload");
-    const imageContainer = document.getElementById("uploadedImageContainer");
-    const modal = document.getElementById('meuModal');
-    const closeBtn = document.getElementById('closeModal');
-    const botaoUpload = document.getElementById('botaoUpload');
-    const imagemParaSubstituir = document.getElementById('imagemParaSubstituir');
+  function toggleJanelaInput() {
+    const janela = document.getElementById("janela-input");
+    janela.style.display = (janela.style.display === "none" || janela.style.display === "") ? "block" : "none";
+  }
 
-    // Função para trocar a imagem de um elemento específico
-    function setImagem(srcUrl) {
-      if (imagemParaSubstituir) {
-        imagemParaSubstituir.src = srcUrl;
-      } else {
-        console.warn('Elemento com id "imagemParaSubstituir" não encontrado.');
-      }
-      // Fecha o modal
-      if (modal) {
-        modal.style.display = 'none';
-      }
+  function updateImage() {
+    const url = document.getElementById("image-url-input").value;
+    if (url) {
+      document.getElementById("overlay-image").src = url;
+      document.getElementById("overlay-container").style.display = "flex";
+      document.getElementById("janela-input").style.display = "none"; // Fecha após incluir
     }
+  }
 
-    // Evento: clicar no emoji 🏆 para abrir o seletor de ficheiros
-    if (uploadTrigger && imageInput) {
-      uploadTrigger.addEventListener("click", () => {
-        imageInput.click();
-      });
-    }
+  function closeOverlay() {
+    document.getElementById("overlay-container").style.display = "none";
+    document.getElementById("janela-input").style.display = "none";
+  }
+  
 
-    // Evento: ao selecionar uma imagem
-    if (imageInput && imageContainer) {
-      imageInput.addEventListener("change", function () {
-        const file = this.files[0];
-        if (file) {
-          const reader = new FileReader();
-          reader.onload = function (e) {
-            imageContainer.innerHTML = `<img src="${e.target.result}" style="max-width: 100%; max-height: 400px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.5);">`;
-          };
-          reader.readAsDataURL(file);
-        }
-      });
-    }
+function toggleJanelaSheets() {
+  const janela = document.getElementById("janela-sheets");
+  janela.style.display = (janela.style.display === "none" || janela.style.display === "") ? "block" : "none";
+}
 
+function voltarSheets() {
+  // Esconde a janela com o iframe do Google Sheets
+  document.getElementById("janela-sheets").style.display = "none";
+}
+  
 </script>
-
-
-  <script>
-    // Botões e elementos
-    const botaoUpload = document.getElementById("botaoUpload");
-    const botaoFicheiro = document.getElementById("botaoFicheiro");
-    const modalURL = document.getElementById("modalURL");
-    const modalFicheiro = document.getElementById("modalFicheiro");
-    const fecharModalURL = document.getElementById("fecharModalURL");
-    const fecharModalFicheiro = document.getElementById("fecharModalFicheiro");
-    const inserirURL = document.getElementById("inserirURL");
-    const imagem = document.getElementById("imagemParaSubstituir");
-
-    // Mostrar modais
-    botaoUpload.onclick = () => modalURL.style.display = "flex";
-    botaoFicheiro.onclick = () => modalFicheiro.style.display = "flex";
-
-    // Fechar modais
-    fecharModalURL.onclick = () => modalURL.style.display = "none";
-    fecharModalFicheiro.onclick = () => modalFicheiro.style.display = "none";
-
-    // Clicar fora fecha modal
-    window.onclick = (e) => {
-      if (e.target === modalURL) modalURL.style.display = "none";
-      if (e.target === modalFicheiro) modalFicheiro.style.display = "none";
-    };
-
-    // Substituir imagem
-    inserirURL.onclick = () => {
-      const url = document.getElementById("urlInput").value;
-      if (url) {
-        imagem.src = url;
-        modalURL.style.display = "none";
-      } else {
-        alert("Por favor, introduz um URL válido.");
-      }
-    };
-  </script>
 
 
   
