@@ -319,40 +319,83 @@
 }
     
     
+  /* Botão Emoji */
+    #botaoUpload {
+      font-size: 24px;
+      cursor: pointer;
+      margin: 20px;
+    }    
+    
     
     /* Estilos do modal */
-.modal {
-  display: none; /* Escondido por padrão */
-  position: fixed;
-  z-index: 9999;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgba(0,0,0,0.6);
-}
+    /* Modal base */
+    .modal {
+      display: none; /* Escondido por defeito */
+      position: fixed;
+      z-index: 1000;
+      left: 0; top: 0;
+      width: 100%; height: 100%;
+      background-color: rgba(0,0,0,0.5);
+      justify-content: center;
+      align-items: center;
+    }
 
-.modal-content {
-  background-color: #fff;
-  margin: 5% auto;
-  padding: 20px;
-  width: 90%;
-  max-width: 1000px;
-  border-radius: 8px;
-  position: relative;
-}
+    .modal-content {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      display: flex;
+      gap: 20px;
+      width: 500px;
+    }
 
-.close {
-  position: absolute;
-  top: 10px;
-  right: 20px;
-  font-size: 28px;
-  font-weight: bold;
-  cursor: pointer;
-}
+    .modal-main {
+      flex: 1;
+    }
+
+    .modal-url {
+      flex: 1;
+    }
+
+    .modal-url input {
+      width: 100%;
+      padding: 8px;
+      margin-top: 5px;
+    }
+
+    .close {
+      position: absolute;
+      top: 15px;
+      right: 30px;
+      font-size: 30px;
+      color: white;
+      cursor: pointer;
+    }
+    
+       input[type="url"] {
+      width: 100%;
+      padding: 8px;
+      margin-top: 10px;
+    }
     
     
+        button {
+      padding: 10px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    
+    
+  #imagemParaSubstituir {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      max-width: calc(100% - 0px);
+      max-height: calc(100% - 0px);
+      z-index: 1;
+      height: 140%;
+    }
     
   </style>
 </head>
@@ -525,8 +568,35 @@
   z-index: 4;
 ">
   <span contenteditable="true" spellcheck="false" style="outline: none;">Bem Vindos</span>
-  <span id="botaoUpload" style="cursor: pointer;">👋</span>
+
+
+  <!-- Botões -->
+  <span id="botaoUpload" class="botao">👋</span>
+  <span id="botaoFicheiro" class="botao">📁</span>
+
+  <!-- Modal 1: URL -->
+  <div id="modalURL" class="modal">
+    <div class="modal-content">
+      <span class="close" id="fecharModalURL">&times;</span>
+      <h3>Introduz o link</h3>
+      <input type="url" id="urlInput" placeholder="https://exemplo.pt" />
+      <button id="inserirURL">Substituir imagem</button>
+    </div>
+  </div>
+
+  <!-- Modal 2: Google Sheets -->
+  <div id="modalFicheiro" class="modal">
+    <div class="modal-content">
+      <span class="close" id="fecharModalFicheiro">&times;</span>
+      <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vQhdwqlBJCLBu4UosgSEHj20zvHMIjlMlUL9M-0e37QO8RiX0x5jGNZn1Y4KC77iEfB4OHHzIaWTWOq/pubhtml"></iframe>
+    </div>
+  </div>
+
+
 </h2>
+
+  <!-- Imagem a substituir -->
+  <!--<img id="imagemParaSubstituir" src="" alt="" />-->
 
 <!-- Imagem a substituir (com id para facilitar a seleção) -->
 <img 
@@ -649,43 +719,45 @@
       });
     }
 
-    // Evento: clicar no emoji 👋 para abrir o modal
-    if (botaoUpload) {
-      botaoUpload.addEventListener('click', () => {
-        if (modal) {
-          modal.style.display = 'block';
-        }
-      });
-    }
-
-    // Evento: fechar o modal ao clicar no botão de fechar
-    if (closeBtn) {
-      closeBtn.addEventListener('click', () => {
-        if (modal) {
-          modal.style.display = 'none';
-        }
-      });
-    }
-
-    // Evento: clicar fora do modal para fechar
-    window.addEventListener('click', (event) => {
-      if (modal && event.target == modal) {
-        modal.style.display = 'none';
-      }
-    });
-
-    // Evento: receber mensagens do iframe
-    window.addEventListener('message', (event) => {
-      // Opcional: verificar event.origin para segurança
-      // if (event.origin !== 'https://seu-dominio.com') return;
-
-      if (typeof event.data === 'string' && event.data.startsWith('imagem:')) {
-        const srcUrl = event.data.replace('imagem:', '');
-        setImagem(srcUrl);
-      }
-    });
-  });
 </script>
+
+
+  <script>
+    // Botões e elementos
+    const botaoUpload = document.getElementById("botaoUpload");
+    const botaoFicheiro = document.getElementById("botaoFicheiro");
+    const modalURL = document.getElementById("modalURL");
+    const modalFicheiro = document.getElementById("modalFicheiro");
+    const fecharModalURL = document.getElementById("fecharModalURL");
+    const fecharModalFicheiro = document.getElementById("fecharModalFicheiro");
+    const inserirURL = document.getElementById("inserirURL");
+    const imagem = document.getElementById("imagemParaSubstituir");
+
+    // Mostrar modais
+    botaoUpload.onclick = () => modalURL.style.display = "flex";
+    botaoFicheiro.onclick = () => modalFicheiro.style.display = "flex";
+
+    // Fechar modais
+    fecharModalURL.onclick = () => modalURL.style.display = "none";
+    fecharModalFicheiro.onclick = () => modalFicheiro.style.display = "none";
+
+    // Clicar fora fecha modal
+    window.onclick = (e) => {
+      if (e.target === modalURL) modalURL.style.display = "none";
+      if (e.target === modalFicheiro) modalFicheiro.style.display = "none";
+    };
+
+    // Substituir imagem
+    inserirURL.onclick = () => {
+      const url = document.getElementById("urlInput").value;
+      if (url) {
+        imagem.src = url;
+        modalURL.style.display = "none";
+      } else {
+        alert("Por favor, introduz um URL válido.");
+      }
+    };
+  </script>
 
 
   
