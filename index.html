@@ -397,6 +397,46 @@
       height: 140%;
     }
     
+    
+    
+    .countdown-container {
+  max-width: 600px;
+  margin: auto;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px #000;
+    max-width: calc(90% - 40px);
+}
+
+
+.countdown-container {
+  max-width: 600px;
+  margin: auto;
+  background-image: url("https://static.wixstatic.com/media/a6967f_de32038c155c40bfa711b85d00ce031e~mv2.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px #000;
+  color: white;
+}
+
+
+
+
+#timer {
+  font-size: 2.5em;
+  margin-top: 20px;
+  letter-spacing: 2px;
+  color:white;
+    text-shadow: 2px 2px 4px black; /* <- sombra preta */
+  
+}
+    
+    
+    
+    
   </style>
 </head>
 <body>
@@ -666,7 +706,7 @@
 
 	  
 	  <!--NESTE PRIMEIRO É QUE SE MUDA A IMAGEM-->
-    <img 
+    <!--<img 
       id="overlay-image"
         src="https://static.wixstatic.com/media/a6967f_7ca7e41276104678be29746f828de6fc~mv2.png"
      
@@ -679,7 +719,21 @@
         border-radius: 16px;
         margin-bottom: 15px;
       "
-    />
+    />-->
+    
+    
+    
+      <div class="countdown-container">
+    <h1></h1>
+    <div id="timer">
+      <span id="days">00</span>d :
+      <span id="hours">00</span>h :
+      <span id="minutes">00</span>m :
+      <span id="seconds">00</span>s
+    </div>
+  </div>
+    
+    
   </div>
 	<!--MULTIWASHER IMAGE-->
    <img src="https://static.wixstatic.com/media/a6967f_47b7d4337cb34b21bb40d1290ebef7f1~mv2.png"
@@ -811,6 +865,36 @@
       `;
     }
     setInterval(updateTimer, 1000);
+  </script> 
+  
+  
+  
+    <script> 
+  const targetDate = new Date("2025-08-08T13:00:00");
+
+function updateCountdown() {
+  const now = new Date();
+  const diff = targetDate - now;
+
+  if (diff <= 0) {
+    document.getElementById("timer").textContent = "Tempo esgotado!";
+    clearInterval(timerInterval);
+    return;
+  }
+
+  const seconds = Math.floor((diff / 1000) % 60);
+  const minutes = Math.floor((diff / 1000 / 60) % 60);
+  const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+
+  document.getElementById("days").textContent = String(days).padStart(2, '0');
+  document.getElementById("hours").textContent = String(hours).padStart(2, '0');
+  document.getElementById("minutes").textContent = String(minutes).padStart(2, '0');
+  document.getElementById("seconds").textContent = String(seconds).padStart(2, '0');
+}
+
+const timerInterval = setInterval(updateCountdown, 1000);
+updateCountdown(); // chamada inicial
   </script> 
   
   
