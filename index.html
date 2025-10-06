@@ -679,66 +679,58 @@
   </div>
 
   <!-- Imagem sobreposta -->
-  <div id="overlay-container" class="overlay-container" style="
+ <div id="overlay-container" class="overlay-container" style="
     position: absolute;
     top: 60%;
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 1;
     display: flex;
+    flex-direction: column; /* muda para coluna */
     align-items: center;
     justify-content: center;
-    width: 100%;
+    width: 85%; /*ajuste tamanho das imagens*/
     height: 100%;
     pointer-events: none;
-  ">
+">
 
+  <!-- Primeira imagem -->
+  <img 
+    id="overlay-image-top"
+    src="https://static.wixstatic.com/media/a6967f_69e99d2631d34445842f85f4ed37beb5~mv2.png"
+    alt=""
+    style="
+      max-width: calc(90% - 40px);
+      max-height: 200px;
+      margin: 0 20px 15px 20px;
+      object-fit: contain;
+      border-radius: 16px;
+      background-color: white;
+      padding: 10px;
+    "
+  />
 
+  <!-- Segunda imagem -->
+  <img 
+    id="overlay-image-bottom"
+    src="https://static.wixstatic.com/media/a6967f_2c2d815998664054bf716a25580d67af~mv2.png"
+    alt=""
+    style="
+      max-width: calc(90% - 40px);
+      max-height: 200px;
+      margin: 0 20px;
+      object-fit: contain;
+      border-radius: 16px;
+      background-color: white;
+      padding: 10px;
+    "
+  />
 
+</div>
 
-
-	  
-  <!--IMAGEM BEM VINDOS!!!!!!!!--><!--IMAGEM BEM VINDOS!!!!!!!!--><!--IMAGEM BEM VINDOS!!!!!!!!--><!--IMAGEM BEM VINDOS!!!!!!!!##################################################-->
-   <!--src="https://static.wixstatic.com/media/a6967f_47b7d4337cb34b21bb40d1290ebef7f1~mv2.png"-->
-
-<!--src="https://upload.wikimedia.org/wikipedia/commons/f/f9/Logo_Intertek_01.svg"-->
- <!--src="https://static.wixstatic.com/media/a6967f_8487ebe8e048475c82473fe627bf3567~mv2.png"-->
-
-	  
-	  <!--NESTE PRIMEIRO É QUE SE MUDA A IMAGEM-->
-    <img 
-      id="overlay-image"
-       
-     src="https://static.wixstatic.com/media/a6967f_8487ebe8e048475c82473fe627bf3567~mv2.png"
-
-		
-      alt=""
-      style="
-        max-width: calc(90% - 40px);
-        max-height: 200px;
-        margin: 0 20px;
-        object-fit: contain;
-        border-radius: 16px;
-        margin-bottom: 15px;
-        background-color: white;
-        padding:10px;
-      "
-    />
-    
-    
-    
-     <!-- <div class="countdown-container">
-    <h1></h1>
-    <div id="timer">
-      <span id="days">00</span>d :
-      <span id="hours">00</span>h :
-      <span id="minutes">00</span>m :
-      <span id="seconds">00</span>s
-    </div>
-  </div>-->
-    
-    
-  </div>
+  
+  
+  
 	<!--MULTIWASHER IMAGE-->
    <img src="https://static.wixstatic.com/media/a6967f_47b7d4337cb34b21bb40d1290ebef7f1~mv2.png"
    
